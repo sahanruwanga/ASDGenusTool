@@ -1,0 +1,12 @@
+------- Personal Details & Results -------
+Name - Sample
+Age - 10 years
+Gender - Male
+Report Date - Oct 3, 2019 4:39:06 PM
+ASD Result - Low ASD
+Result Description - Predicted ADOS-2 score range: 7 - 12
+------- EEG Signal Details -------
+Number of Channels - 32 channels
+Channel Names - Fp1 Fz F3 F7 FT9 FC5 FC1 C3 T7 TP9 CP5 CP1 Pz P3 P7 O1 Oz O2 P4 P8 TP10 CP6 CP2 Cz C4 T8 FT10 FC6 FC2 F4 F8 Fp2
+Signal Duration - 2085.08 seconds
+Signal Recorded Date - 2018-04-13 16:16:47
