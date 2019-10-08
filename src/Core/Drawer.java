@@ -69,6 +69,5 @@ public class Drawer {
             }
         }
         return EEG_SIGNAL_IMAGE_URI;
-    }
-    
+    }  
 }

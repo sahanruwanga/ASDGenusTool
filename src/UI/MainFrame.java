@@ -8,9 +8,11 @@ package UI;
 import Core.Drawer;
 import Core.EEGFile;
 import Core.EEGSignal;
+import Core.HelpDocumentFinder;
 import Core.Predictor;
 import Core.Report;
 import Core.ReportWriter;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -21,6 +23,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -114,6 +118,8 @@ public class MainFrame extends javax.swing.JFrame {
         visualizeNameLabel = new javax.swing.JLabel();
         changeViewComboBox = new javax.swing.JComboBox<>();
         HelpPanel = new javax.swing.JPanel();
+        qsgHelpButton = new javax.swing.JButton();
+        docHelpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ASDGenus | Tool for Lives");
@@ -434,6 +440,8 @@ public class MainFrame extends javax.swing.JFrame {
         ageResultText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         dateResultText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        dateResultText.setText(" ");
+        dateResultText.setFocusable(false);
 
         genderResultText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
@@ -508,8 +516,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(mainPreditionResultPanelLayout.createSequentialGroup()
                                 .addComponent(nameResultLabel)
                                 .addGap(10, 10, 10)
-                                .addComponent(nameResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(335, 335, 335)
+                                .addComponent(nameResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(325, 325, 325)
                         .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPreditionResultPanelLayout.createSequentialGroup()
                                 .addComponent(dateResultLabel)
@@ -517,7 +525,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(dateResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(mainPreditionResultPanelLayout.createSequentialGroup()
                                 .addComponent(genderResultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(genderResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(mainPreditionResultPanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -535,19 +543,17 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(resultSeperator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nameResultLabel)
-                        .addComponent(genderResultLabel))
+                .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameResultLabel)
+                    .addComponent(genderResultLabel)
                     .addComponent(nameResultText)
-                    .addComponent(genderResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(genderResultText))
+                .addGap(26, 26, 26)
                 .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ageResultText)
-                        .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ageResultLabel)
-                            .addComponent(dateResultLabel)))
+                    .addGroup(mainPreditionResultPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ageResultLabel)
+                        .addComponent(dateResultLabel)
+                        .addComponent(ageResultText))
                     .addComponent(dateResultText, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(resultPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -571,7 +577,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(recordedDateDetailsText))
                 .addGap(83, 83, 83)
                 .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         asdResultLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -691,15 +697,39 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Visualize", VisualizePanel);
 
+        qsgHelpButton.setText("Quick Start Guide");
+        qsgHelpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                qsgHelpButtonActionPerformed(evt);
+            }
+        });
+
+        docHelpButton.setText("About ASDGenus");
+        docHelpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                docHelpButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);
         HelpPanel.setLayout(HelpPanelLayout);
         HelpPanelLayout.setHorizontalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1445, Short.MAX_VALUE)
+            .addGroup(HelpPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(qsgHelpButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(docHelpButton)
+                .addContainerGap(1195, Short.MAX_VALUE))
         );
         HelpPanelLayout.setVerticalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 722, Short.MAX_VALUE)
+            .addGroup(HelpPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(qsgHelpButton)
+                    .addComponent(docHelpButton))
+                .addContainerGap(676, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Help", HelpPanel);
@@ -847,6 +877,28 @@ public class MainFrame extends javax.swing.JFrame {
         setReportDate(false);
     }//GEN-LAST:event_changeViewCBoxItemChanged
 
+    private void qsgHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qsgHelpButtonActionPerformed
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(HelpDocumentFinder.getQuickStartFilePath());
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_qsgHelpButtonActionPerformed
+
+    private void docHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docHelpButtonActionPerformed
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(HelpDocumentFinder.getAboutToolFilePath());
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_docHelpButtonActionPerformed
+
     private void clearRecordDetails(){
         nameResultText.setText("");
         ageResultText.setText("");
@@ -888,6 +940,19 @@ public class MainFrame extends javax.swing.JFrame {
         recordedDateDetailsText.setVisible(bool);
         channelNamesDetailsLabel.setVisible(bool);
         channelNamesDetailsText.setVisible(bool);
+    }
+    
+    /**
+     * 
+     */
+    private void makeResultsEmpty(){
+        resultText.setText("--");
+        descriptionText.setText("--");
+        noOfChannelsDetailsText.setText("");
+        channelNamesDetailsText.setText("");
+        durationDetailsText.setText("");
+        recordedDateDetailsText.setText("");
+        saveResultButton.setEnabled(false);
     }
     
     /**
@@ -985,6 +1050,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel dateResultLabel;
     private javax.swing.JLabel dateResultText;
     private javax.swing.JLabel descriptionText;
+    private javax.swing.JButton docHelpButton;
     private javax.swing.JLabel durationDetailsLabel;
     private javax.swing.JLabel durationDetailsText;
     private javax.swing.JPanel eegImportOuterPanel;
@@ -1016,6 +1082,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pDetailOuterPanel;
     private javax.swing.JButton predictASDButton;
     private javax.swing.JPanel predictionPanel;
+    private javax.swing.JButton qsgHelpButton;
     private javax.swing.JLabel recordedDateDetailsLabel;
     private javax.swing.JLabel recordedDateDetailsText;
     private javax.swing.JLabel resultHeaderLabel;

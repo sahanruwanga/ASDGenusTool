@@ -16,6 +16,6 @@ public class PythonPathFinder {
      * @return 
      */
     public static String getPythonPath(){
-        return "C:/Users/Sahan/AppData/Local/Programs/Python/Python37/python";
+        return "python";
     }
 }
