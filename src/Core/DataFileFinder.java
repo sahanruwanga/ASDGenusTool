@@ -16,5 +16,6 @@ public class DataFileFinder {
     public static String getTrainingDataFilePath(){
         String currentPath = System.getProperty("user.dir");
         return Paths.get(currentPath).toString() + "/src/Resources/features_with_cfs.csv";
+//        return Paths.get(currentPath).toString() + "\\lib\\resources\\data\\features_with_cfs.csv";
     }
 }

@@ -16,13 +16,16 @@ public class PythonScriptFinder {
     
     public static String getPredictScript(){
         return Paths.get(currentPath).toString() + "/src/PythonScripts/predict.py";
+//        return Paths.get(currentPath).toString() + "\\lib\\resources\\python_scripts\\predict.py";
     }
     
     public static String getHeadLocationPlotScript(){
         return Paths.get(currentPath).toString() + "/src/PythonScripts/plot_head_locations.py";
+//        return Paths.get(currentPath).toString() + "\\lib\\resources\\python_scripts\\plot_head_locations.py";
     }
     
     public static String getEEGSignalPlotScript(){
         return Paths.get(currentPath).toString() + "/src/PythonScripts/plot_eeg_signal.py";
+//        return Paths.get(currentPath).toString() + "\\lib\\resources\\python_scripts\\plot_eeg_signal.py";
     }
 }

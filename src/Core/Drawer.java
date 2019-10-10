@@ -19,7 +19,9 @@ import java.util.logging.Logger;
 public class Drawer {
     static String currentPath = System.getProperty("user.dir");
     private static final String HEAD_LOCATION_IMAGE_URI = Paths.get(currentPath).toString() + "/src/images/head_locations.png";
+//    private static final String HEAD_LOCATION_IMAGE_URI = Paths.get(currentPath).toString() + "\\lib\\resources\\images\\head_locations.png";
     private static final String EEG_SIGNAL_IMAGE_URI = Paths.get(currentPath).toString() + "/src/images/eeg_signal.png";
+//    private static final String EEG_SIGNAL_IMAGE_URI = Paths.get(currentPath).toString() + "\\lib\\resources\\images\\eeg_signal.png";
     private String path_for_head = "";
     private String path_for_signal = "";
     

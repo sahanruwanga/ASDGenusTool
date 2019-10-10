@@ -22,6 +22,8 @@ public class ReportWriter {
         try {
             FileWriter file = new FileWriter(Paths.get(currentPath).toString() + "/src/Reports/" +
                     report.getName() + "_" + report.getReportDate().substring(0, 11) +".txt");
+//            FileWriter file = new FileWriter(Paths.get(currentPath).toString() + "\\lib\\resources\\reports\\" +
+//                    report.getName() + "_" + report.getReportDate().substring(0, 11) +".txt");
             file.write("------- Personal Details & Results -------" + "\n");
             file.write("Name - " + report.getName() + "\n");
             file.write("Age - " + report.getAge() + "\n");

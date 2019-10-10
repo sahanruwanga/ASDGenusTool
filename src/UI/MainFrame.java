@@ -118,8 +118,6 @@ public class MainFrame extends javax.swing.JFrame {
         visualizeNameLabel = new javax.swing.JLabel();
         changeViewComboBox = new javax.swing.JComboBox<>();
         HelpPanel = new javax.swing.JPanel();
-        qsgHelpButton = new javax.swing.JButton();
-        docHelpButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ASDGenus | Tool for Lives");
@@ -697,39 +695,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Visualize", VisualizePanel);
 
-        qsgHelpButton.setText("Quick Start Guide");
-        qsgHelpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                qsgHelpButtonActionPerformed(evt);
-            }
-        });
-
-        docHelpButton.setText("About ASDGenus");
-        docHelpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                docHelpButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout HelpPanelLayout = new javax.swing.GroupLayout(HelpPanel);
         HelpPanel.setLayout(HelpPanelLayout);
         HelpPanelLayout.setHorizontalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HelpPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(qsgHelpButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(docHelpButton)
-                .addContainerGap(1195, Short.MAX_VALUE))
+            .addGap(0, 1445, Short.MAX_VALUE)
         );
         HelpPanelLayout.setVerticalGroup(
             HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(HelpPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(HelpPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(qsgHelpButton)
-                    .addComponent(docHelpButton))
-                .addContainerGap(676, Short.MAX_VALUE))
+            .addGap(0, 722, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Help", HelpPanel);
@@ -763,6 +737,10 @@ public class MainFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(VisualizePanel, "Choose a file to plot first!");
                 jTabbedPane1.setSelectedIndex(0);
             }
+        }
+        if(jTabbedPane1.getSelectedIndex()==2){
+            openHelpPdf();
+            jTabbedPane1.setSelectedIndex(0);
         }
     }//GEN-LAST:event_tabSelectChanged
 
@@ -859,14 +837,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void changeViewCBoxItemChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_changeViewCBoxItemChanged
         ImageIcon imgIcon;
-        if (evt.getItem().toString() == "Locations"){
+        if (evt.getItem().toString().equals("Locations")){
             imgIcon = new ImageIcon(Drawer.getInstance().getEEGHeadLocationImage());
             if(imgIcon != null){
                 visualizeLabel.setIcon(imgIcon);
                 visualizeLabel.setHorizontalAlignment(JLabel.CENTER);
                 visualizeLabel.setVerticalAlignment(JLabel.CENTER);
             }
-        }else if(evt.getItem().toString() == "EEG Signal"){
+        }else if(evt.getItem().toString().equals("EEG Signal")){
             imgIcon = getFitSizeImage(Drawer.getInstance().getEEGSignalImage());
             if(imgIcon != null){
                 visualizeLabel.setIcon(imgIcon);
@@ -877,28 +855,17 @@ public class MainFrame extends javax.swing.JFrame {
         setReportDate(false);
     }//GEN-LAST:event_changeViewCBoxItemChanged
 
-    private void qsgHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_qsgHelpButtonActionPerformed
+    private void openHelpPdf(){
         if (Desktop.isDesktopSupported()) {
             try {
-                File myFile = new File(HelpDocumentFinder.getQuickStartFilePath());
+                File myFile = new File(HelpDocumentFinder.getHelpPdfFilePath());
                 Desktop.getDesktop().open(myFile);
             } catch (IOException ex) {
                 Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }//GEN-LAST:event_qsgHelpButtonActionPerformed
-
-    private void docHelpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_docHelpButtonActionPerformed
-        if (Desktop.isDesktopSupported()) {
-            try {
-                File myFile = new File(HelpDocumentFinder.getAboutToolFilePath());
-                Desktop.getDesktop().open(myFile);
-            } catch (IOException ex) {
-                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_docHelpButtonActionPerformed
-
+    }
+    
     private void clearRecordDetails(){
         nameResultText.setText("");
         ageResultText.setText("");
@@ -1050,7 +1017,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel dateResultLabel;
     private javax.swing.JLabel dateResultText;
     private javax.swing.JLabel descriptionText;
-    private javax.swing.JButton docHelpButton;
     private javax.swing.JLabel durationDetailsLabel;
     private javax.swing.JLabel durationDetailsText;
     private javax.swing.JPanel eegImportOuterPanel;
@@ -1082,7 +1048,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel pDetailOuterPanel;
     private javax.swing.JButton predictASDButton;
     private javax.swing.JPanel predictionPanel;
-    private javax.swing.JButton qsgHelpButton;
     private javax.swing.JLabel recordedDateDetailsLabel;
     private javax.swing.JLabel recordedDateDetailsText;
     private javax.swing.JLabel resultHeaderLabel;
